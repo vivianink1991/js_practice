@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Test</title>
+<style>
+.list {
+    padding: 20px;
+    border: 1px solid purple;
+}
+.list li {
+    width: 120px;
+    height: 35px;
+    margin-top: 20px;
+    line-height: 35px;
+    padding: 0 20px;
+    background: tomato;
+    text-align: center;
+    color: #fff;
+}
+</style>
+</head>
+<body>
+<ul class="list" id="list">
+    <li><span>1</span></li>
+    <li><span>2</span></li>
+    <li><span>3</span></li>
+</ul>
+<script src="./js/event.js"></script>
+<script>
+var list = document.getElementById('list');
+EventUtil.on(list, 'click', 'li span', function(e) {
+    console.info('clicking', this.innerHTML);
+});
+
+// EventUtil.on(list, 'click', function(e) {
+//     console.info('clicking', this.innerHTML);
+// });
+</script>
+</body>
+</html>
