@@ -7,8 +7,9 @@ var EventUtil = {
 * @param {function} handler 事件处理函数
 **/
     on: function(delegator, type, selector, handler) {
+
         if (delegator.addEventListener) {
-            delegator.addEventListener(type, eventFunc);
+            delegator.addEventListener(type, eventFunc, false);
 
         } else if (delegator.attachEvent){
             delegator.attachEvent('on' + type, eventFunc);
@@ -18,8 +19,23 @@ var EventUtil = {
         }
 
         function eventFunc(event) {
+
             var event = event || window.event;
             var target = event.target || event.srcElement;
+
+            // 阻止默认行为
+            if (!event.preventDefault) {
+                event.preventDefault = function(event) {
+                    event.returnValue = false;
+                }
+            }
+
+            //阻止冒泡
+            if (!event.stopPropagation) {
+                event.stopPropagation = function(event) {
+                    event.cancelBubble = true;
+                }
+            }
 
             if (typeof selector === 'function') { //绑定自身
                 var _handler = selector;

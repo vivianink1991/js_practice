@@ -22,20 +22,22 @@
 </head>
 <body>
 <ul class="list" id="list">
-    <li><span>1</span></li>
-    <li><span>2</span></li>
-    <li><span>3</span></li>
+    <li><a href="">1</a></li>
+    <li><a href="">2</a></li>
+    <li><a href="">3</a></li>
 </ul>
 <script src="./js/event.js"></script>
 <script>
 var list = document.getElementById('list');
-EventUtil.on(list, 'click', 'li span', function(e) {
+EventUtil.on(list, 'click', 'li a', function(e) {
+    e.preventDefault();
+    e.stopPropagation(); //没有作用？
     console.info('clicking', this.innerHTML);
 });
 
-// EventUtil.on(list, 'click', function(e) {
-//     console.info('clicking', this.innerHTML);
-// });
+EventUtil.on(list, 'click', function(e) {
+    console.info('clicking', this.innerHTML);
+});
 </script>
 </body>
 </html>
