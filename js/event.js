@@ -89,7 +89,7 @@ Event.prototype = {
             var handlers = this.listeners[eventName];
 
             for (var i = 0, len = handlers.length; i < len; i++) { // forEach IE9+
-                handlers[i].apply(null, handlerParam); //this待定
+                handlers[i].apply(this, handlerParam); //this待定?
             }
         }
     },
