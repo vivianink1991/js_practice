@@ -35,9 +35,22 @@ EventUtil.on(list, 'click', 'li a', function(e) {
     console.info('clicking', this.innerHTML);
 });
 
-EventUtil.on(list, 'click', function(e) {
-    console.info('clicking', this.innerHTML);
+// EventUtil.on(list, 'click', function(e) {
+//     console.info('clicking', this.innerHTML);
+// });
+
+var eventSet = new Event();
+function sayHi(name) {
+    console.info('Hi' + name);
+}
+eventSet.bind('click', function(arg) {
+    console.info('click', 'hello' + arg);
 });
+eventSet.bind('click', sayHi);
+
+eventSet.trigger('click', ' Anna');
+eventSet.remove('click', sayHi);
+eventSet.trigger('click', ' Lily');
 </script>
 </body>
 </html>

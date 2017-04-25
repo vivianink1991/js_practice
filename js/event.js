@@ -67,3 +67,54 @@ var EventUtil = {
         }
     }
 };
+
+function Event() {
+    this.listeners = {};
+}
+
+Event.prototype = {
+    //订阅事件
+    bind: function(eventName, handler) {
+        if (!this.listeners.hasOwnProperty(eventName)) {
+            this.listeners[eventName] = [];
+        }
+        this.listeners[eventName].push(handler);
+    },
+
+    //发布事件
+    trigger: function(eventName) {
+        if (this.listeners.hasOwnProperty(eventName)) {
+
+            var handlerParam = Array.prototype.slice.apply(arguments).slice(1);
+            var handlers = this.listeners[eventName];
+
+            for (var i = 0, len = handlers.length; i < len; i++) { // forEach IE9+
+                handlers[i].apply(null, handlerParam); //this待定
+            }
+        }
+    },
+
+    //移除某事件上绑定的某函数
+    remove: function(eventName, handler) {
+        if (this.listeners.hasOwnProperty(eventName)) {
+            var handlers = this.listeners[eventName];
+            var index = -1;
+            for (var i = 0, len = handlers.length; i < len; i++) { //indexOf IE9+
+                if (handlers[i] === handler) {
+                    index = i;
+                    break;
+                }
+            }
+            if (index !== -1) {
+                handlers.splice(index, 1);
+            } 
+        }
+    },
+
+    //移除某事件上绑定的所有函数
+    removeAll: function(eventName) {
+        if (this.listeners.hasOwnProperty(eventName)) {
+            this.listeners[eventName].length = 0;
+        }
+    }
+}
