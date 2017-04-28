@@ -27,6 +27,7 @@
     <li><a href="">3</a></li>
 </ul>
 <script src="./js/event.js"></script>
+<script src="./js/sort.js"></script>
 <script>
 var list = document.getElementById('list');
 EventUtil.on(list, 'click', 'li a', function(e) {
@@ -51,6 +52,12 @@ eventSet.bind('click', sayHi);
 eventSet.trigger('click', ' Anna');
 eventSet.remove('click', sayHi);
 eventSet.trigger('click', ' Lily');
+
+var arr = [3, 12, 3, 5, 1, 19, 2];
+var len = arr.length;
+mergeSort(arr, 0, len - 1, []);
+console.info('mergeSort', arr);
+
 </script>
 </body>
 </html>
