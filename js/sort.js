@@ -151,9 +151,7 @@ function mergeSort(arr, first, last, temp) {
 
 function mergeArray(arr, first, mid, last, temp) {
     var i = first,
-        // m = mid,
         j = mid + 1,
-        // n = last,
         k = 0;
 
     while (i <= mid && j <= last) {
